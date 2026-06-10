@@ -3414,7 +3414,7 @@ function exportXLSX() {
     ['Estufa 2 pós Germinação', sectionTotal('Estufa 2')],
     ['Viveiro 3', sectionTotal('Viveiro 3')],
     ['Viveiro 4', sectionTotal('Viveiro 4')],
-    ['TOTAL GERAL', '=SOMA(B2:B5)']
+    ['TOTAL GERAL', sectionTotal('Estufa 1') + sectionTotal('Estufa 2') + sectionTotal('Viveiro 3') + sectionTotal('Viveiro 4')]
   ];
   const ws2 = XLSX.utils.aoa_to_sheet(sum);
   ws2['!cols'] = [{wch:32}, {wch:16}];
@@ -3422,7 +3422,7 @@ function exportXLSX() {
   ws2['A1'].s = headerStyle;
   ws2['B1'].s = headerStyle;
   ws2['A6'].s = totalStyle;
-  ws2['B6'] = { t: 'n', f: 'SOMA(B2:B5)', v: grandTotal(), z: '#,##0', s: totalStyle };
+  ws2['B6'] = { t: 'n', v: sectionTotal('Estufa 1') + sectionTotal('Estufa 2') + sectionTotal('Viveiro 3') + sectionTotal('Viveiro 4'), z: '#,##0', s: totalStyle };
   Object.keys(ws2).forEach(cell => {
     if (/^B\d+$/.test(cell) && cell !== 'B1') ws2[cell].z = '#,##0';
   });
